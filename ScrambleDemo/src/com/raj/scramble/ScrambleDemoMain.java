@@ -45,17 +45,19 @@ public class ScrambleDemoMain {
 	return begin + c + end;
     }
 
-    public static void isPresent(List<String> inputString, List<String> permutedList) {
+    public static List<String> findInInputString(List<String> inputString, List<String> permutedList) {
 	int count = 0;
+	List<String> list = new ArrayList<>();
 	for (int i = 1; i <= inputString.size(); i++) {
 	    for (int j = 0; j < permutedList.size(); j++) {
 		if (inputString.get(i - 1).contains(permutedList.get(j)))
 		    count++;
 	    }
-	    System.out.println("Case #" + i + " : " + count);
+	    list.add("Case #" + i + " : " + count);
 	    count = 0;
 
 	}
+	return list;
     }
 
     public static void main(String[] args) {
@@ -70,7 +72,7 @@ public class ScrambleDemoMain {
 	    permutedList.addAll(getPermutation(getIntermediateText(s), s.charAt(0), s.charAt(s.length() - 1)));
 	}
 	// Check for Permutations in file
-	isPresent(inputString, permutedList);
+	findInInputString(inputString, permutedList).stream().forEach(System.out::println);
     }
 
     protected static List<String> readFile(String fileName) {
@@ -95,5 +97,4 @@ public class ScrambleDemoMain {
 	}
 	return list;
     }
-
 }
